@@ -1,6 +1,6 @@
 # OpenSCAD Web GUI
 
-This project uses [`openscad-wasm`](https://github.com/openscad/openscad-wasm) under the hood to
+This project uses a custom [openscad-wasm](https://github.com/openscad/openscad-wasm) build under the hood to
 build an editor for OpenSCAD that is capable of loading `.scad` files from other servers.
 
 ## Features
@@ -13,13 +13,18 @@ build an editor for OpenSCAD that is capable of loading `.scad` files from other
   or https://www.printables.com/model/123456-model-name)
 - You can import your own libraries or chose from a list of common libraries
 - You can add your own fonts or choose from a list of common fonts
-- You can export your customized model to STL, OFF, AMF, CSG, DXF and SVG
+- You can export your customized model to STL, 3MF (with color), OFF, AMF, CSG, DXF and SVG
 
 # Dev
+
+The WASM files are not committed to the repository. Download them before running:
 
 ```bash
 git clone https://github.com/seasick/openscad-web-gui
 npm i
+mkdir -p src/vendor/openscad-wasm
+curl -L https://raw.githubusercontent.com/mikekuniavsky/openscad-wasm-debug/main/test-server/tests/openscad.js -o src/vendor/openscad-wasm/openscad.js
+curl -L https://raw.githubusercontent.com/mikekuniavsky/openscad-wasm-debug/main/test-server/tests/openscad.wasm -o src/vendor/openscad-wasm/openscad.wasm
 npm run dev # Run a webserver and rebuild on file changes
 # npm run lint
 # npm run test
