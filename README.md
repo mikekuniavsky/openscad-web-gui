@@ -1,6 +1,6 @@
 # OpenSCAD Web GUI
 
-**[▶ Try it live on GitHub Pages](https://seasick.github.io/openscad-web-gui/)**
+**[▶ Try it live on GitHub Pages](https://mikekuniavsky.github.io/openscad-web-gui/)**
 
 This project uses a custom [openscad-wasm](https://github.com/openscad/openscad-wasm) build under the hood to
 build an editor for OpenSCAD that is capable of loading `.scad` files from other servers.
