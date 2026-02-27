@@ -13,8 +13,11 @@ export async function readFrom3MFFile(
     try {
       const loader = new ThreeMFLoader();
       const group = loader.parse(contents);
-      
-      // Center the group based on its bounding box
+
+      // OpenSCAD uses Z-up; Three.js uses Y-up
+      group.rotation.set(-Math.PI / 2, 0, 0);
+
+      // Center the group based on its bounding box (computed after rotation)
       const box = new THREE.Box3().setFromObject(group);
       const center = box.getCenter(new THREE.Vector3());
       group.position.sub(center);
