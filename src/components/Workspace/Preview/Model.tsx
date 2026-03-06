@@ -1,4 +1,5 @@
 import { Center } from '@react-three/drei';
+import { useThree } from '@react-three/fiber';
 import React, { useEffect, useRef } from 'react';
 import * as THREE from 'three';
 
@@ -9,10 +10,11 @@ type Props = JSX.IntrinsicElements['mesh'] & {
 export default function Model({ geometry, ...props }: Props) {
   const groupRef = useRef<THREE.Group>();
   const [loading, setLoading] = React.useState<boolean>(true);
+  const { invalidate } = useThree();
 
   useEffect(() => {
     groupRef.current?.clear();
-    
+
     if (geometry) {
       // For 3MF files and complex models, ensure shadow casting is enabled
       geometry.traverse((child: THREE.Object3D) => {
@@ -21,12 +23,13 @@ export default function Model({ geometry, ...props }: Props) {
           child.receiveShadow = true;
         }
       });
-      
+
       groupRef.current?.add(geometry);
     }
-    
+
     setLoading(false);
-  }, [geometry]);
+    invalidate();
+  }, [geometry, invalidate]);
 
   return (
     // Center object in the viewport
